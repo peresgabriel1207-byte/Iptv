@@ -16,9 +16,10 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     env:
-      # Configure em: Settings > Secrets and variables > Actions > Variables
-      UPSTREAM_REPO: ${{ vars.UPSTREAM_REPO }}       # ex.: dono/repositorio-original
-      UPSTREAM_BRANCH: ${{ vars.UPSTREAM_BRANCH }}   # opcional (padrao: branch principal do original)
+      # Padrao: o repositorio original. Para trocar, crie as variaveis em
+      # Settings > Secrets and variables > Actions > Variables
+      UPSTREAM_REPO: ${{ vars.UPSTREAM_REPO || 'Ramys/Iptv-Brasil-2026' }}
+      UPSTREAM_BRANCH: ${{ vars.UPSTREAM_BRANCH || 'master' }}
     steps:
       - name: Verificar configuracao
         run: |

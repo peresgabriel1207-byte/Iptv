@@ -60,19 +60,20 @@ Números esperados no log de indexação: ~19.374 ao vivo, ~127.254 filmes, ~32.
    (`live`, `movie` ou `episode`; `&category=Nome` filtra por categoria).
 
 ## Sincronizar com o repositório original
-O repositório original é **uma informação que só o dono tem** (este repositório não é um fork oficial).
-Pergunte ao dono **uma única vez**: "Qual é o endereço do repositório original (dono/repo)?" e então:
-1. No GitHub do dono: *Settings → Secrets and variables → Actions → Variables → New repository variable*
-   `UPSTREAM_REPO = dono/repositorio-original` (opcional `UPSTREAM_BRANCH`). Isso é feito pelo dono na
-   página do GitHub (você não tem acesso à conta dele): dê o passo a passo.
-2. O workflow só roda quando estiver na `master`: o dono precisa fazer o **merge da `xtream-server` na
+O original é **https://github.com/Ramys/Iptv-Brasil-2026** (branch `master`). Este repositório é uma cópia
+dele (não é fork oficial do GitHub, por isso a sincronização copia arquivos em vez de fazer merge).
+Já está configurado como padrão no workflow — **não é preciso criar variável nenhuma**.
+1. O workflow só roda quando estiver na `master`: o dono precisa fazer o **merge da `xtream-server` na
    `master`** (Pull Request no GitHub). Avise que, na primeira sincronização, arquivos que existem só neste
    repositório e não no original **serão apagados** (exceto `server/`, `scripts/`, `docker-compose.yml`,
    `.env.example`, `.gitignore`, `LEIAME-SERVIDOR.md`, `INSTRUCOES-CLAUDE.md`, `.github/workflows/`).
-3. Teste: *Actions → Sincronizar com o repositório original → Run workflow*. Deve terminar verde.
-4. Sincronização manual no PC, se preferir: `scripts/sync-upstream.sh dono/repo-original`.
-5. O container já faz `git pull` sozinho a cada 6 h (`GIT_PULL_INTERVAL_MIN`) e reindexa quando as
+   Na data da configuração, a estrutura de arquivos do original era idêntica à deste repositório.
+2. Teste: *Actions → Sincronizar com o repositório original → Run workflow*. Deve terminar verde.
+3. Sincronização manual no PC: `scripts/sync-upstream.sh Ramys/Iptv-Brasil-2026 master`.
+4. O container já faz `git pull` sozinho a cada 6 h (`GIT_PULL_INTERVAL_MIN`) e reindexa quando as
    listas mudam; para forçar: `docker compose restart`.
+5. Limite do GitHub: 100 MB por arquivo. As maiores listas do original têm ~94 MB; se o original
+   passar de 100 MB, o push da sincronização falha — avise o dono.
 
 ## Tudo gratuito — opções e limites honestos
 | Necessidade | Opção gratuita | Observação / risco |
@@ -97,5 +98,4 @@ suspensão automática; elas não aguentam um índice desse tamanho e o dono pod
 
 ## O que reportar ao dono no final
 Diga em poucas linhas: o que funcionou, o que não foi testado, o endereço/usuário para colocar no
-HM IPTV, e o que ainda depende dele (informar o repositório original, fazer o merge na `master`, criar a
-variável `UPSTREAM_REPO`).
+HM IPTV, e o que ainda depende dele (fazer o merge na `master`).

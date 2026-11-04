@@ -47,10 +47,11 @@ servidor**: ele redireciona o app para a URL original de cada item (baixo uso de
 Dois niveis, ambos automaticos:
 
 1. **GitHub -> este repositorio** (`.github/workflows/sync-upstream.yml`, a cada 6 h).
-   Configure uma vez em *Settings -> Secrets and variables -> Actions -> Variables*:
-   `UPSTREAM_REPO` = `dono/repositorio-original` (opcional `UPSTREAM_BRANCH`).
+   O original ja vem configurado: `Ramys/Iptv-Brasil-2026` (branch `master`). Nao precisa criar nada;
+   so fazer o merge desta branch na `master`. Para trocar de original, crie as variaveis
+   `UPSTREAM_REPO` / `UPSTREAM_BRANCH` em *Settings -> Secrets and variables -> Actions -> Variables*.
    Rode manualmente em *Actions -> Sincronizar com o repositorio original -> Run workflow*.
-   Para sincronizar no seu PC: `scripts/sync-upstream.sh dono/repositorio-original`.
+   Para sincronizar no seu PC: `scripts/sync-upstream.sh Ramys/Iptv-Brasil-2026 master`.
 2. **Repositorio -> servidor**: o container faz `git pull` a cada `GIT_PULL_INTERVAL_MIN` minutos
    e reindexa sozinho quando as listas mudam.
 
