@@ -1,0 +1,35 @@
+name: Sincronizar com o repositorio original
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"   # a cada 6 horas
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      # Configure em: Settings > Secrets and variables > Actions > Variables
+      UPSTREAM_REPO: ${{ vars.UPSTREAM_REPO }}       # ex.: dono/repositorio-original
+      UPSTREAM_BRANCH: ${{ vars.UPSTREAM_BRANCH }}   # opcional (padrao: branch principal do original)
+    steps:
+      - name: Verificar configuracao
+        run: |
+          if [ -z "$UPSTREAM_REPO" ]; then
+            echo "::error::Defina a variavel de repositorio UPSTREAM_REPO (dono/repositorio-original)."
+            exit 1
+          fi
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Sincronizar
+        run: scripts/sync-upstream.sh "$UPSTREAM_REPO" "$UPSTREAM_BRANCH"
+      - name: Publicar
+        run: git push origin HEAD

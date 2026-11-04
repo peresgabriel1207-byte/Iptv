@@ -1,0 +1,17 @@
+# Servidor Xtream Codes das listas deste repositorio.
+#   1) cp .env.example .env   (e edite usuario/senha)
+#   2) docker compose up -d --build
+# No app de IPTV use: Xtream Codes -> http://IP_DO_PC:8080 + usuario + senha.
+services:
+  xtream:
+    build: ./server
+    container_name: xtream-m3u
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${PORT:-8080}:8080"
+    volumes:
+      - .:/data          # o proprio repositorio (listas .m3u8 + .git para o git pull automatico)
+      - xtream-db:/db    # indice SQLite (pode ser apagado, e recriado sozinho)
+volumes:
+  xtream-db:
