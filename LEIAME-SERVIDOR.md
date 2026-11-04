@@ -4,6 +4,8 @@ Transforma as listas `.m3u8` deste repositorio num servidor **Xtream Codes** (us
 formato dos servicos de IPTV. O app baixa so a categoria que voce abre, em vez de carregar um arquivo de
 300 MB. Filmes, series (episodios agrupados por serie/temporada) e canais ao vivo ficam separados.
 
+> Para uma sessão do Claude executar tudo no PC, comece por `INSTRUCOES-CLAUDE.md`.
+
 ## Rodar (no PC)
 
 Precisa de Docker (Docker Desktop no Windows/Mac).
@@ -53,7 +55,7 @@ Dois niveis, ambos automaticos:
    e reindexa sozinho quando as listas mudam.
 
 O sync nunca mexe em `server/`, `scripts/`, `docker-compose.yml`, `.env.example` e
-`.github/workflows/`; o resto e copiado do original (arquivos apagados la sao apagados aqui).
+`.github/workflows/`, `LEIAME-SERVIDOR.md` e `INSTRUCOES-CLAUDE.md`; o resto e copiado do original (arquivos apagados la sao apagados aqui).
 
 ## Limites
 

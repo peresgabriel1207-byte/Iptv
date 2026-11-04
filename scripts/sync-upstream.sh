@@ -14,7 +14,7 @@ case "$UP" in
 esac
 
 # Arquivos que sao NOSSOS e nunca sao sobrescritos/apagados pelo upstream.
-OWN='^(server/|scripts/|docker-compose\.yml$|\.env\.example$|\.gitignore$|LEIAME-SERVIDOR\.md$|\.github/workflows/)'
+OWN='^(server/|scripts/|docker-compose\.yml$|\.env\.example$|\.gitignore$|LEIAME-SERVIDOR\.md$|INSTRUCOES-CLAUDE\.md$|\.github/workflows/)'
 
 git remote remove upstream 2>/dev/null || true
 git remote add upstream "$URL"
